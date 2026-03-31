@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "name": "Juan Pérez",
+    "email": "juan@example.com",
+    "password": "$2b$10$KIXQ4p7sYFz8Zz8v6WQh5eX8x8z7zYz9Yz9Yz9Yz9Yz9Yz9Yz9Yz",
+    "role": "user",
+    "createdAt": "2026-03-20T10:15:00Z"
+  },
+  {
+    "id": 2,
+    "name": "María González",
+    "email": "maria@example.com",
+    "password": "$2b$10$JH8k2s9Df8s7Df8s7Df8s7Df8s7Df8s7Df8s7Df8s7Df8s7Df8s",
+    "role": "admin",
+    "createdAt": "2026-03-18T14:30:00Z"
+  },
+  {
+    "id": 3,
+    "name": "Carlos López",
+    "email": "carlos@example.com",
+    "password": "$2b$10$A9sd8f7sd8f7sd8f7sd8f7sd8f7sd8f7sd8f7sd8f7sd8f7sd8f",
+    "role": "user",
+    "createdAt": "2026-03-22T09:00:00Z"
+  },
+  {
+    "id": 4,
+    "name": "Ana Torres",
+    "email": "ana@example.com",
+    "password": "$2b$10$Zx7c6v5b4n3m2l1k9j8h7g6f5d4s3a2q1w0e9r8t7y6u5i4o3p",
+    "role": "user",
+    "createdAt": "2026-03-25T16:45:00Z"
+  },
+  {
+    "id": 5,
+    "name": "Pedro Ramírez",
+    "email": "pedro@example.com",
+    "password": "$2b$10$Qw1e2r3t4y5u6i7o8p9a0s9d8f7g6h5j4k3l2z1x0c9v8b7n6m",
+    "role": "user",
+    "createdAt": "2026-03-27T12:10:00Z"
+  }
+]
