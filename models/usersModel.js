@@ -5,16 +5,26 @@ let users = data;
 
 export class UserModel {
   static userRegister = async (user) => {
-    users.push(user);
-    return user;
+    const isEmailYet = users.find((userYet) => userYet.email === user.email);
+    if (!isEmailYet) {
+      const hashedPassword = await bcrypt.hash(user.password, 10);
+      user.password = hashedPassword;
+      users.push(user);
+      return user;
+    }
+    return null;
   };
 
   static userLogin = async (email, password) => {
     const findUser = users.find((user) => user.email === email);
-    const isMatch = await bcrypt.compare(password, findUser.password);
-    if (isMatch === true) {
-      return findUser;
+    if (!findUser) {
+      return null;
     }
-    return false;
+    const isMatch = await bcrypt.compare(password, findUser.password);
+    if (!isMatch) {
+      return null;
+    }
+    const { password: _, ...safeUser } = findUser;
+    return safeUser;
   };
 }
