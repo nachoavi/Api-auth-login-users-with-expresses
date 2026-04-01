@@ -1,0 +1,94 @@
+🚀 🔐 RESUMEN: API de autenticación con Express + JWT
+🧱 1. Flujo completo de autenticación
+🔄 Cómo funciona todo:
+Usuario se registra
+Usuario hace login
+Backend valida credenciales
+Backend genera token JWT
+Cliente guarda el token
+Cliente lo envía en cada request
+Middleware valida el token
+Acceso a rutas protegidas
+🔐 2. Generación del token (login)
+const token = jwt.sign(
+  { id: user.id, role: user.role },
+  SECRET,
+  { expiresIn: "1h" }
+);
+🧠 Claves:
+El token contiene datos mínimos (id, role)
+Está firmado con SECRET
+Tiene expiración
+🛡️ 3. Middleware de autenticación
+const authHeader = req.headers.authorization;
+const token = authHeader.split(" ")[1];
+
+const decoded = jwt.verify(token, SECRET);
+req.user = decoded;
+
+next();
+🧠 Claves:
+El token viene desde el cliente en headers
+Se valida con jwt.verify
+Se guarda en req.user
+📦 4. req.user (pieza clave)
+👉 Es el puente entre middleware y controller
+Contiene:
+{
+  "id": 1,
+  "role": "user"
+}
+🧠 Uso:
+identificar usuario
+controlar permisos
+buscar datos en DB
+🧭 5. Rutas protegidas
+router.get("/profile", authMiddleware, getProfile);
+👉 Primero pasa por middleware
+👉 Luego llega al controller con req.user
+🎯 6. Controller (perfil)
+const userId = req.user.id;
+const profile = UserModel.userProfile(userId);
+🧠 Claves:
+NO necesitas pedir el id al cliente
+Ya viene en el token
+🧱 7. Modelo
+users.find(user => user.id === Number(id));
+🧠 Claves:
+Separación de responsabilidades
+Manejo de datos centralizado
+🔐 8. Seguridad básica
+Hash de contraseñas (bcrypt)
+No devolver password:
+const { password, ...userSafe } = user;
+Uso de SECRET
+Validación de token
+🌍 9. Headers HTTP
+Cliente envía:
+Authorization: Bearer TOKEN
+🧠 Claves:
+Backend es stateless
+El token se envía en cada request
+⚙️ 10. Variables de entorno
+JWT_SECRET=mi_secreto
+dotenv.config();
+process.env.JWT_SECRET;
+🧠 Claves:
+No hardcodear secretos
+Seguridad real
+🧠 11. Arquitectura que usaste
+Routes → definen endpoints
+Middleware → validación y seguridad
+Controllers → lógica
+Models → acceso a datos
+👉 Esto es MVC simplificado
+🔥 LO MÁS IMPORTANTE (qué te tienes que quedar sí o sí)
+Si solo recuerdas esto, ya estás sobre el promedio:
+✅ 1.
+JWT guarda identidad (id, role)
+✅ 2.
+Middleware valida y crea req.user
+✅ 3.
+Controllers usan req.user para lógica
+✅ 4.
+El cliente envía el token en Authorization

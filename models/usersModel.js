@@ -27,4 +27,12 @@ export class UserModel {
     const { password: _, ...safeUser } = findUser;
     return safeUser;
   };
+
+  static userProfile = async (id) => {
+    const findUser = users.find((user) => user.id === id);
+    if (!findUser) {
+      return null;
+    }
+    return findUser;
+  };
 }

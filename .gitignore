@@ -1,0 +1,5 @@
+# Ignorar variables de entorno
+.env
+
+# (Opcional) Ignorar cualquier archivo .env con variantes
+.env.*
