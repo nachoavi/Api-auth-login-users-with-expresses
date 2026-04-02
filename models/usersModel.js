@@ -31,7 +31,12 @@ export class UserModel {
   };
 
   static userLogin = async (email, password) => {
-    const findUser = users.find((user) => user.email === email);
+    const [rows] = await pool.query("SELECT * FROM users WHERE email = ?", [
+      email,
+    ]);
+
+    const findUser = rows[0];
+
     if (!findUser) {
       return null;
     }
@@ -44,7 +49,8 @@ export class UserModel {
   };
 
   static userProfile = async (id) => {
-    const findUser = users.find((user) => user.id === id);
+    const [rows] = await pool.query("SELECT * FROM users WHERE id = ?", [id]);
+    const findUser = rows[0];
     if (!findUser) {
       return null;
     }
